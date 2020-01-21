@@ -17,7 +17,11 @@
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
-                margin: 0;
+                margin: 20px;
+            }
+
+            p {
+                width: 60%;
             }
 
             .full-height {
@@ -68,9 +72,8 @@
         <div class="links">
             <a href="/pre">Prerequisites</a>
             <a href="/routing">Routing</a>
-            
             <a href="/visual">Visual</a>
-            
+            <a href="/database">Database Access</a>
             <a href="/test">Test</a>
             <a href="https://blog.laravel.com">Blog</a>
             <a href="https://nova.laravel.com">Nova</a>

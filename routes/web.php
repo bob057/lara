@@ -31,6 +31,32 @@ Route::get('/visual', function () {
     return view('visual');
 });
 
+Route::get('/database', function () {
+    return view('database', [
+        'escapedPostBody' => "{{ \$post=>body }}"
+    ]);
+});
+
+/*
+Route::get('/posts/{post}', function ($post) {
+    $posts = [
+        'my-first-post' => 'first post, csdiojcosdi diojcdiocjiosd jicosjcsd odkospvsvdsi',
+        'my-second-post' => 'second post, ckoskcoapbcuhua nisjciaosc nioascj vmwopvmpowmv'
+    ];
+
+    if (! array_key_exists($post, $posts)) {
+        abort(404, 'Sorry, that post was not found');
+    }
+
+    return view('post', [
+        'post' => $posts[$post]
+    ]);
+    
+});
+*/
+
+Route::get('/posts/{post}', 'PostsController@show');
+
 Route::get('/test', function () {
     $name = request('name');
     return view('test', [

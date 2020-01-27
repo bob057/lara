@@ -205,16 +205,95 @@ Files generated:
 <div>
 <h2>13 Business Logic</h2>
 <p>
-Start making a new model called Assignments:
+Start making a new model called Assignment:
 <pre>
-        php artisan make:model Assignments -mc
+        php artisan make:model Assignment -mc
 </pre>
 
-Imagine some manager wants to make something. Add columns for the database to make it look like this:
+Imagine some manager wants to make something. Add columns for the database (in database\migrations\2020_01_21_144854_create_assignments_table.php) to 
+make the up() function look like this:
+<pre>
+        public function up()
+        {
+                Schema::create('assignments', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->text('body');
+                $table->timestamp('completed_at')-> nullable();
+                $table->timestamps();
+                $table->timestamp('due_date')->nullable();
+                });
+        }
+</pre>
 
-3:13 : 0:47
+In this case the column 'completed_at' is a timestamp, which is nullable. If the assignment is completed, the time when it was completed is saved.
+A more simple way is using a boolean for this column. The downside of this approach is that the date of completion will not be saved. Use 'php artisan migrate'
+to apply the changes to the database. Use 'php artisan migrate:fresh' in order to rebuild the database completely. Remember all entries will be deleted this way.<br>
 
+The next thing is using the created model to make an example record. In the command line open 'php artisan tinker'. This is a shell in which php commands can 
+be executed. Let's make a new assignment like this:
 
+<pre>
+        >>> $assignment = new App\Assignment;
+</pre>
+
+If you defined the column 'completed' as a boolean, make sure to add a default of false and migrate again by using 'php artisan migrate:rollback' and 'php artisan
+migrate'.
+<pre>
+        $table=>boolean('completed')->default(false);
+</pre>
+
+The new assignment will need a 'body', 'completed' and 'due_date'. 'id', 'created_at' and 'updated_at' are automatically filled in.<br>
+
+Now a body will be added to the assignment. Remember to save it as well by calling the save() function.
+<pre>
+        >>> $assignment->body = 'Finish school work';
+        => "Finish school work"
+        >>> $assignment->save();
+        => true
+</pre>
+
+To see all data from the table use the following command:
+<pre>
+        >>> App\Assignment::all();
+</pre>
+
+To see the first entry of the table use the following command:
+<pre>
+        >>> App\Assignment::first();
+</pre>
+
+Query the table using the following command (when 'completed' is boolean):
+<pre>
+        >>> App\Assignment::where('completed', false)->get();
+</pre>
+
+Query the table using the following command (when 'completed_at' is a timestamp):
+<pre>
+        >>> App\Assignment::where('completed_at', NULL)->get();
+</pre>
+
+How to change the status of an assignment to completed in a way that is easily understood:<br>
+
+To complete an assignment a complete() function would be good for this.
+<pre>
+        >>> $assignment->complete()
+        BadMethodCallException with message 'Call to undefined method App/Assignment::complete()'
+</pre>
+
+We will have to make a complete() function in the .../app/Assignment.php model.  
+<pre>
+        class Assignments extends Model
+        {
+                public function complete()
+                {
+                        $this->completed_at = now();
+                        $this->save();
+                }
+        }
+</pre>
+If the 'completed' variable is boolean use '$this->completed = true;'<br>
+Call '$assignment = App\Assignments::first();' again to see the changes'.<br>
+Wrapping multiple commands in a function will avoid code duplication.<br>
 
 
 </p>

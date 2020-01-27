@@ -27,15 +27,23 @@ Route::get('/routing', function () {
     ]);
 });
 
-Route::get('/visual', function () {
-    return view('visual');
-});
-
 Route::get('/database', function () {
     return view('database', [
         'escapedPostBody' => "{{ \$post=>body }}"
     ]);
 });
+
+Route::get('/views', function () {
+    return view('views', [
+        'escapedYield' => "@yield"
+    ]);
+});
+
+Route::get('/visual', function () {
+    return view('visual');
+});
+
+
 
 /*
 Route::get('/posts/{post}', function ($post) {

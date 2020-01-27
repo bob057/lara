@@ -72,8 +72,9 @@
         <div class="links">
             <a href="/pre">Prerequisites</a>
             <a href="/routing">Routing</a>
-            <a href="/visual">Visual</a>
             <a href="/database">Database Access</a>
+            <a href="/views">Views</a>
+            <a href="/visual">Visual</a>
             <a href="/test">Test</a>
             <a href="https://blog.laravel.com">Blog</a>
             <a href="https://nova.laravel.com">Nova</a>

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends ('layout')
 
 @section ('content')
 
@@ -8,22 +8,17 @@
 <div>
 <h2>14 Layout Pages</h2>
     <p>
-    Using views cleans up the code and avoids code duplication by reusing commonly used code. This can be a header containing style attributes and scripts.
-    In the .../resources/views/ directory make a layout file (layout.blade.php). In this file a {{ $escapedYield }} is placed where the content of the unique pages is inserted.
-        <pre>
-
-        </pre>
-        <pre>
-
-        </pre>
-        <pre>
-
-        </pre>
-
-
-
+    Using views cleans up code and avoids code duplication by reusing commonly used code. This can be a header containing style attributes and scripts.
+    In the .../resources/views/ directory make a layout file (layout.blade.php). In this file a {{ $escapedYield }} is placed where the content of the 
+    unique pages is inserted. This refers to the 'content' section of the page where the layout file is extended.
     </p>
- 
+
+    <p>  
+    To use the reusable code on a page a {{ $escapedExtends }} is placed at the place where the code needs to be inserted. In case of headers and scripts this 
+    can be at the top of the page. The code that is unique will be placed in a section. The section starts with {{ $escapedSection }} and 
+    ends with {{ $escapedEndsection}}.
+    </p>
+
 </div>
 
 <div>

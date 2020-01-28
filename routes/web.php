@@ -29,13 +29,16 @@ Route::get('/routing', function () {
 
 Route::get('/database', function () {
     return view('database', [
-        'escapedPostBody' => "{{ \$post=>body }}"
+        'escapedPostBody' => "{{ \$post=>body }}"        
     ]);
 });
 
 Route::get('/views', function () {
     return view('views', [
-        'escapedYield' => "@yield"
+        'escapedYield' => "@yield ('content')",
+        'escapedExtends' => "@extends ('layout')",
+        'escapedSection' => "@section ('content')",
+        'escapedEndsection' => "@endsection"
     ]);
 });
 
